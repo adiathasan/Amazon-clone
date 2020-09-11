@@ -30,11 +30,11 @@
 
 @media (max-width:580px){
     .home__container{
-        margin-top: -46px;
+        margin-top: -66px;
     }
     .home__row{
         flex-direction: column;
-        margin: 50px 20px 0 20px;
+        margin: 70px 20px 0 20px;
     }
 
 }

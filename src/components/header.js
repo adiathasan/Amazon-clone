@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../css/header.css'
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
+import { Link } from 'react-router-dom'
+import { context } from '../dataLayer/CheckoutContext'
 
 function Header() {
+    const {cart} = useContext(context);
+    const totalItem = cart.totalItem
     return (
         <div className="header">
-            <img src="https://pngimg.com/uploads/amazon/amazon_PNG25.png"  className='header__logo'
-            />
+            <Link to='/' className='header__logoLink'>
+                <img src="https://pngimg.com/uploads/amazon/amazon_PNG25.png" className='header__logo'
+                />
+            </Link>
             <div className="header__search">
                 <input type="text" className='header__searchInput'/>
                 <SearchIcon
@@ -40,8 +46,10 @@ function Header() {
                     </span>
                 </div>
                 <div className="header__optionBasket">
-                    <ShoppingBasketIcon />
-                    <div className="header__optionLineTwo header__basketCount">0</div>
+                    <Link to='/checkout'>
+                        <ShoppingBasketIcon className="header__linkBasket"/>
+                    </Link>
+                <div className="header__optionLineTwo header__basketCount">{totalItem}</div>
                 </div>
             </div>
         </div>

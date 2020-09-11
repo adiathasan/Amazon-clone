@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import '../css/product.css'
+import { context } from '../dataLayer/CheckoutContext';
 
 function Product({ price, title, image, rating , id}) {
+    const { dispatch } = useContext(context);
     const unRate = 5 - rating
     return (
         <div className='product' key={id}>
@@ -14,7 +16,7 @@ function Product({ price, title, image, rating , id}) {
                 <div className="product__rating">
                     {
                        rating && Array(rating).fill().map((_, i)=>{
-                           return <span className="fa fa-star checked"></span>
+                           return <span className="fa fa-star checked" key={Math.random()}></span>
                                
                        })
                     }
@@ -28,7 +30,16 @@ function Product({ price, title, image, rating , id}) {
                 </div>
             </div>
             <img src={image} alt=""/>
-            <button>Add to Basket</button>
+            <button onClick={()=> dispatch({
+                type: 'ITEM_ADDED',
+                item: {
+                    id: Math.random(),
+                    title,
+                    rating,
+                    image,
+                    price
+                }
+            })}>Add to Basket</button>
         </div>
     )
 }

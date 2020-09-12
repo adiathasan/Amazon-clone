@@ -4,21 +4,31 @@ import Header from './components/header';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Checkout from './components/checkout';
 import CheckoutContextProvider from './dataLayer/CheckoutContext';
-
+import Login from './components/login';
+import Payment from './components/payment';
 
 function App() {
   return (
       <BrowserRouter>
         <div className="App">
         <CheckoutContextProvider>
-          <Header />
+          
           <Switch>
+              <Route path='/login'>
+                <Login />
+              </Route> 
               <Route path='/checkout'>
+                <Header />
                 <Checkout/>
               </Route>  
+              <Route path='/payment'>
+                <Header />
+                <Payment/>
+              </Route>  
               <Route path='/'>
+                <Header />
                 <Home/>
-              </Route>    
+              </Route>       
           </Switch>
         </CheckoutContextProvider>
         </div>

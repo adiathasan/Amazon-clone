@@ -1,0 +1,22 @@
+.payment{
+    margin: 80px 0;
+}
+
+.payment > h2{
+    text-align: center;
+}
+
+.payment__conatiner{
+    background-color: #ffffff;
+    min-height: 70vh;
+    width: 90vh;
+    margin: 20px auto;
+}
+
+.flex__loading{
+    height: 100vh;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

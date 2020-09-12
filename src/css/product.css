@@ -14,6 +14,7 @@
     height: 400px;
     min-width: 100px;
     margin: 10px;
+    opacity: .7;
 }
 
 .product__price{
@@ -34,13 +35,26 @@
 }
 
 .product > button{
-    margin-top: 10px;
-    background-color: #f7b335;
-    padding: 2px 7px;
     cursor: pointer;
-    color: #1a0f0f;
-    border: 1px solid #6e4f21 ;
-    font-weight: 300;
+	border: 1px solid #282a2c;
+
+	*background: url(https://stevefitzpatrick.co.uk/demos/amazoncart.png) no-repeat 2px 2px #FFEEC7; /* old browsers */
+	background-image: url(https://stevefitzpatrick.co.uk/demos/amazoncart.png), 
+		-moz-linear-gradient(top, #FFEEC7 0%, #FFE39D 49%, 
+				#FFE7AA 50%, #FFD057 56%, 
+				#B49034 100%); /* firefox */
+	background-image: url(https://stevefitzpatrick.co.uk/demos/amazoncart.png), 
+		-webkit-gradient(linear, left top, left bottom, 
+				color-stop(0%,#FFEEC7), color-stop(49%,#FFE39D), 
+				color-stop(50%,#FFE7AA), color-stop(51%,#FFD057), 
+				color-stop(100%,#B49034)); /* webkit */
+
+	*background-image: url(https://stevefitzpatrick.co.uk/demos/amazoncart.png); /* Deucey IE hack to get image to appear */
+
+	background-repeat: no-repeat;
+	background-position: 0 1px;
+    padding: 4px 7px;
+    border-radius: 3px;
 }
 @media (max-width:580px){
     .product{

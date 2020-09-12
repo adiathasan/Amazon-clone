@@ -11,28 +11,33 @@ const CheckoutContextProvider = ({children}) => {
                     items: [
                         ...state.items,
                         action.item
-                    ],
-                    totalItem: [
-                        ...state.items,
-                        action.item
-                    ].length
+                    ]
                 }
             case 'ITEM_REMOVED':
                 const newBasket = state.items.filter(item => item.id != action.id)
                 return {
                     items:[
                         ...newBasket
-                    ],
-                    totalItem: newBasket.length 
+                    ]
+                }
+            case 'USER_SIGNED_IN':
+                return{
+                    ...state,
+                    user: action.user
                 }
             default:
                 return state
         }
     }
 
-    const [cart, dispatch] = useReducer(reducer, {items:[], totalItem:0})
+    const [cart, dispatch] = useReducer(reducer, {items:[], user: null})
+    const getTotalPrice = () =>{
+        return (
+            cart.items?.reduce((price, item) => price + item.price, 0)
+        )
+    }
     return (
-        <context.Provider value={{cart, dispatch}}>
+        <context.Provider value={{ cart, dispatch, getTotalPrice}}>
             {children}
         </context.Provider>
     )

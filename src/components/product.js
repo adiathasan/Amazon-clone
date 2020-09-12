@@ -1,12 +1,18 @@
 import React, {useContext} from 'react'
 import '../css/product.css'
 import { context } from '../dataLayer/CheckoutContext';
+import {motion} from 'framer-motion/dist/framer-motion'
 
 function Product({ price, title, image, rating , id}) {
     const { dispatch } = useContext(context);
     const unRate = 5 - rating
     return (
-        <div className='product' key={id}>
+        <motion.div 
+        whileHover={{
+            opacity: 1,
+            boxShadow: '3px 3px 3px 3px #888888'
+        }}
+        className='product' key={id}>
             <div className="product__info">
                 <p>{title && title}</p>
                 <p className='product__price'>
@@ -40,7 +46,7 @@ function Product({ price, title, image, rating , id}) {
                     price
                 }
             })}>Add to Basket</button>
-        </div>
+        </motion.div>
     )
 }
 

@@ -1,13 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../css/header.css'
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import { Link } from 'react-router-dom'
 import { context } from '../dataLayer/CheckoutContext'
+import { auth } from '../config/firebaseConfig'
+import {motion} from 'framer-motion/dist/framer-motion'
 
 function Header() {
-    const {cart} = useContext(context);
-    const totalItem = cart.totalItem
+    const {cart, dispatch} = useContext(context);
+    const totalItem = cart.items.length
+    const user = cart.user
+    useEffect(()=>{
+        auth.onAuthStateChanged(user =>{
+            if(user){
+                dispatch({
+                    type: 'USER_SIGNED_IN',
+                    user
+                })
+            }else{
+                dispatch({
+                    type: 'USER_SIGNED_IN',
+                    user: null
+                })
+            }
+        })
+        
+    }, [])
     return (
         <div className="header">
             <Link to='/' className='header__logoLink'>
@@ -21,14 +40,21 @@ function Header() {
                 />
             </div>
             <div className="header__nav">
-                <div className="header__option">
-                    <span className='header__optionLineOne'>
-                        Hello Guest
-                    </span>
-                    <span className='header__optionLineTwo'>
-                        SignIn
-                    </span>
-                </div>
+                <Link to={user ? '/' : '/login'} className='login__link'>
+                    <div onClick={()=> {
+                        if(user){
+                            auth.signOut();
+                        }
+                    }} className="header__option">
+                        <span className='header__optionLineOne'>
+                            Hello { user?.email }
+                        </span>
+                        <span className='header__optionLineTwo'>
+                            {user ? 'Sign-Out': 'Sign-In'}
+                        </span>
+                    </div>
+                </Link>
+             
                 <div className="header__option">
                     <span className='header__optionLineOne'>
                         Returns
@@ -49,7 +75,9 @@ function Header() {
                     <Link to='/checkout'>
                         <ShoppingBasketIcon className="header__linkBasket"/>
                     </Link>
-                <div className="header__optionLineTwo header__basketCount">{totalItem}</div>
+                    <motion.div layout className="header__optionLineTwo header__basketCount">
+                    {totalItem}
+                    </motion.div>
                 </div>
             </div>
         </div>

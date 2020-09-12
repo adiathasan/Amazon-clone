@@ -1,14 +1,18 @@
 import React, { useContext } from 'react'
 import '../css/home.css'
 import Product from './product'
+import { motion } from 'framer-motion/dist/framer-motion'
 
 function Home() {
     return (
         <div className="home">   
-            <div className="home__container">
+            <motion.div layout initial={{opacity:0}} animate={{opacity:1}} className="home__container">
                 <img src="https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg" 
                 className="home__image"
                 alt=""/>
+                <div className='home__styling'>
+                    {/* for styling */}
+                </div>
                 <div className="home__row">
                     <Product price={100}
                         image={'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1544636345l/43205859._SY475_.jpg'}
@@ -51,7 +55,7 @@ function Home() {
                         id={13}
                     />
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }

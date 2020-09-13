@@ -66,7 +66,7 @@ function Checkout() {
                     <input type="checkbox" />
                     <p>this order contains a gift</p>
                 </div>
-                <button onClick={()=> redirect.push('/payment')} className='checkout__button'>Proceed to Checkout</button>
+                <button onClick={()=> alert('This payment functionality will be added soon...')} className='checkout__button'>Proceed to Checkout</button>
             </motion.div>
         </div>
     )
